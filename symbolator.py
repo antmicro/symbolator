@@ -389,6 +389,7 @@ def parse_args():
   parser = argparse.ArgumentParser(description='HDL symbol generator')
   parser.add_argument('-i', '--input', dest='input', action='store', help='HDL source ("-" for STDIN)')
   parser.add_argument('-o', '--output', dest='output', action='store', help='Output file')
+  parser.add_argument('--output-as-filename', dest='output_as_filename', action='store_true', help='The --output flag will be used directly as output filename')
   parser.add_argument('-f', '--format', dest='format', action='store', default='svg', help='Output format')
   parser.add_argument('-L', '--library', dest='lib_dirs', action='append',
     default=['.'], help='Library path')
@@ -565,7 +566,7 @@ def main():
     for comp, extractor in components:
       comp.name = comp.name.strip('_')
       reformat_array_params(comp)
-      if source == '<stdin>':
+      if source == '<stdin>' or args.output_as_filename:
         fname = args.output
       else:
         fname = '{}{}.{}'.format(
