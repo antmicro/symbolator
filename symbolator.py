@@ -569,7 +569,6 @@ def main():
       if source == '<stdin>':
         fname = args.output
       else:
-        base = os.path.splitext(os.path.basename(source))[0]
         fname = '{}{}.{}'.format(
             args.libname + "__" if args.libname is not None or args.libname != "" else "",
             comp.name,
